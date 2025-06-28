@@ -99,6 +99,9 @@ def coin_change(coins, amount):
     return recurse(coins, amount, 0, 0)
 
 def coin_change_DP(coins, amount):
+    '''
+    dymaic programming
+    '''
     N = len(coins)
     if N == 0 or amount <= 0:
         return 0
