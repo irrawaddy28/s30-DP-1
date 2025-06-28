@@ -32,9 +32,10 @@ Time: O(N*K), Space: O(N*K)
 
 3. Tabulation (bottom-up approach): Construct a 2-D DP array of size
 (N+1) x (K)+1. Initialize it and fill the array using:
-case_0 = dp[i-1][j]
-case_1 = 1 + dp[i][j - coins[i-1]]
-dp[i][j] = min(case_0, case_1)
+    case_0 = dp[i-1][j]
+    case_1 = 1 + dp[i][j - coins[i-1]]
+    dp[i][j] = min(case_0, case_1)
+https://www.youtube.com/watch?v=1p5hI8epOUU
 Time: O(N*K), Space: O(N*K)
 '''
 import time
