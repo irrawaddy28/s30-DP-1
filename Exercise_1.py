@@ -31,7 +31,14 @@ Time: O(N^K), Space: O(N)
 Time: O(N*K), Space: O(N*K)
 
 3. Tabulation (bottom-up approach): Construct a 2-D DP array of size
-(N+1) x (K)+1. Initialize it and fill the array using:
+(N+1) x (K+1).
+
+dp[i][j] = min number of coins required to reach the target amount j using denominations coins[0],...,coins[i-1]
+Note: In the dp matrix, row i=0 correspond to a dummy coin of denomination 0. Hence, row i=1, correspond to coins[0]. Thus dp[1][4] correspond to the min no. of coins to reach target amount 4 using only coins[0]
+Next, row i=2 correspond to coins[1]. dp[2][4] correspond to the min no. of coins to reach target amount 4 using only coins[0] and coins[1].
+In general, row i corresponds to coins[0],...,coins[i-1]
+
+Initialize dp and fill the array using:
     case_0 = dp[i-1][j]
     case_1 = 1 + dp[i][j - coins[i-1]]
     dp[i][j] = min(case_0, case_1)
@@ -40,33 +47,6 @@ Time: O(N*K), Space: O(N*K)
 '''
 import time
 import numpy as np
-
-# def coin_change(coins, amount):
-#     if amount < 0:
-#         return float('inf')
-#     if amount == 0:
-#         return -1
-
-#     m = float('inf')
-#     for c in coins:
-#         nc = 1 + coin_change(coins, amount - c)
-#         m = min(m, nc)
-#     return m
-
-# def coin_change_DP(coins, amount, D):
-#     if amount < 0:
-#         return float('inf')
-#     if amount == 0:
-#         return 0
-
-#     m = float('inf')
-#     for c in coins:
-#         if amount -c not in D:
-#             D[amount -c] = coin_change_DP(coins, amount - c, D)
-#         nc = 1 + D[amount -c]
-#         m = min(m, nc)
-#     return m
-
 
 def coin_change(coins, amount):
     '''
@@ -101,7 +81,7 @@ def coin_change(coins, amount):
 
 def coin_change_DP(coins, amount):
     '''
-    dymaic programming
+    dynamic programming
     '''
     N = len(coins)
     if N == 0 or amount <= 0:

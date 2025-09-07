@@ -40,11 +40,11 @@ Time: O(N), Space: O(N)
 Initialize: dp[0] = 0        (since no loot before the 1st house)
             dp[1] = house[0] (max loot until the 1st house)
 DP computation:
-            dp[2] = max(loot house 2 + prev loot, don't loose house 2 + prev loot)
+            dp[2] = max(loot house 2 + prev loot, don't loot house 2 + prev loot)
 
-            if we loot house 2, then we know for sure we must have skipped house 1. That means our prev loot is from house 0 (dp[0])
+            if we loot house 2, then we know for sure we must have skipped house 1. That means our prev loot is the max loot until house 0 (dp[0])
 
-            if we don't loot house 2, then we must have looted house 1. That means our prev loot is from house 1 (dp[1])
+            if we don't loot house 2, then we may/may not have looted house 1. That means our prev loot is the max loot until house 1 (dp[1])
 
             Thus, for any i, dp[i] = max(house[i-1] + dp[i-2], dp[i-1])
 Time: O(N), Space: O(N)
@@ -105,7 +105,7 @@ def rob(houses):
 
 def rob_DP(houses):
     '''
-    dymaic programming
+    dynamic programming
     '''
     N = len(houses)
     dp = np.zeros(N+1)
